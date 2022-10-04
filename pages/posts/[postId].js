@@ -1,10 +1,4 @@
-import { useRouter } from "next/router";
-
 const Post = ({ post }) => {
-  const router = useRouter();
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
-  }
   return (
     <>
       <h2>
@@ -18,31 +12,30 @@ const Post = ({ post }) => {
 export default Post;
 
 export const getStaticPaths = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await response.json();
+  // const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  // const data = await response.json();
 
-  const paths = data.map((post) => {
-    return {
-      params: {
-        postId: `${post.id}`,
-      },
-    };
-  });
+  // const paths = data.map((post) => {
+  //   return {
+  //     params: {
+  //       postId: `${post.id}`,
+  //     },
+  //   };
+  // });
 
   return {
-    // paths: [
-    //   {
-    //     params: { postId: "1" },
-    //   },
-    //   {
-    //     params: { postId: "2" },
-    //   },
-    //   {
-    //     params: { postId: "3" },
-    //   },
-    // ],
-    paths,
-    fallback: true,
+    paths: [
+      {
+        params: { postId: "1" },
+      },
+      {
+        params: { postId: "2" },
+      },
+      {
+        params: { postId: "3" },
+      },
+    ],
+    fallback: 'blocking',
   };
 };
 
